@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 
+export const emailRegex = /\S+@\S+\.\S+/;
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [shouldStayLoggedIn, setShouldStayLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isEmailValid = email && emailRegex.test(email);
+  const isFormValid = isEmailValid && password;
 
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
@@ -73,9 +78,14 @@ const Login = () => {
         </div>
 
         <button
-          className='w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition duration-300 hover:bg-blue-700'
+          disabled={!isFormValid}
+          className={`w-full rounded-lg py-2 font-medium transition duration-300 ${
+            isFormValid
+              ? 'bg-blue-600 text-white hover:bg-blue-700'
+              : 'cursor-not-allowed bg-gray-300 text-gray-500'
+          }`}
           onClick={() => {
-            /* your login handler here */
+            //login request
           }}
         >
           Log In
