@@ -17,8 +17,8 @@ const Register = () => {
 
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
-      <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl'>
-        <h1 className='mb-6 text-center text-3xl font-bold text-blue-700'>
+      <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl lg:max-w-2xl lg:p-12'>
+        <h1 className='mb-6 text-center text-3xl font-bold text-blue-700 lg:text-4xl'>
           Register
         </h1>
 
@@ -42,7 +42,7 @@ const Register = () => {
             onChange={(e) => setFirstName(e.target.value)}
             placeholder='Enter your first name'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
 
@@ -60,7 +60,7 @@ const Register = () => {
             onChange={(e) => setLastName(e.target.value)}
             placeholder='Enter your last name'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
 
@@ -78,7 +78,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder='Enter your email'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
 
@@ -96,7 +96,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Enter your password'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
 
@@ -114,7 +114,7 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder='Confirm your password'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
           {password && confirmPassword && password !== confirmPassword && (
             <p className='mt-1 text-sm text-red-600'>Passwords do not match</p>
@@ -128,9 +128,6 @@ const Register = () => {
               ? 'bg-blue-600 text-white hover:bg-blue-700'
               : 'cursor-not-allowed bg-gray-300 text-gray-500'
           }`}
-          onClick={() => {
-            //register request
-          }}
         >
           Register
         </button>
