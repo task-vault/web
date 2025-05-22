@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { emailRegex } from './Login';
+import TaskVaultLogo from '../components/TaskVaultLogo';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -20,6 +21,7 @@ const Register = () => {
       <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl lg:max-w-2xl lg:p-12'>
         <h1 className='mb-6 text-center text-3xl font-bold text-blue-700 lg:text-4xl'>
           Register
+          <TaskVaultLogo />
         </h1>
 
         {error && (
@@ -125,7 +127,7 @@ const Register = () => {
           disabled={!isFormValid}
           className={`w-full rounded-lg py-2 font-medium transition duration-300 ${
             isFormValid
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
+              ? 'bg-blue-600 text-white hover:bg-blue-900'
               : 'cursor-not-allowed bg-gray-300 text-gray-500'
           }`}
         >
