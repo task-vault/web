@@ -1,20 +1,38 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { emailRegex } from './Login';
 import TaskVaultLogo from '../components/TaskVaultLogo';
+import useAuth from '../context/AuthContext/useAuth';
 
 const Register = () => {
+  const { register, isLoading } = useAuth();
+  const navigete = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const isPasswordValid =
     password && confirmPassword && password === confirmPassword;
   const isEmailValid = email && emailRegex.test(email);
   const isFormValid = firstName && lastName && isEmailValid && isPasswordValid;
+
+  const handleRegister = async () => {
+    setErrors([]);
+    if (!isFormValid) return;
+    try {
+      await register(firstName, lastName, email, password);
+      navigete('/login');
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrors(error.message.split(';'));
+      } else {
+        setErrors(['An unexpected error occurred. Please try again.']);
+      }
+    }
+  };
 
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
@@ -24,11 +42,16 @@ const Register = () => {
           <TaskVaultLogo />
         </h1>
 
-        {error && (
-          <p className='mb-4 rounded-md bg-red-100 px-3 py-2 text-sm text-red-600'>
-            {error}
-          </p>
-        )}
+        <div className='mb-4'>
+          {errors.map((error, index) => (
+            <p
+              className='mb-1 rounded-md bg-red-100 px-3 py-2 text-sm text-red-600'
+              key={index}
+            >
+              {error}
+            </p>
+          ))}
+        </div>
 
         <div className='mb-4'>
           <label
@@ -129,7 +152,8 @@ const Register = () => {
         </div>
 
         <button
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
+          onClick={handleRegister}
           className={`w-full rounded-lg py-2 font-medium transition duration-300 ${
             isFormValid
               ? 'bg-blue-600 text-white hover:bg-blue-900'

@@ -10,22 +10,22 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [shouldStayLoggedIn, setShouldStayLoggedIn] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const isEmailValid = email && emailRegex.test(email);
   const isFormValid = isEmailValid && password;
 
   const handleLogin = async () => {
-    setError(null);
+    setErrors([]);
     if (!isFormValid) return;
 
     try {
       await login(email, password, shouldStayLoggedIn);
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message);
+        setErrors(error.message.split(';'));
       } else {
-        setError('An unexpected error occurred. Please try again.');
+        setErrors(['An unexpected error occurred. Please try again.']);
       }
     }
   };
@@ -38,11 +38,16 @@ const Login = () => {
           <TaskVaultLogo />
         </h1>
 
-        {error && (
-          <p className='mb-4 rounded-md bg-red-100 px-3 py-2 text-sm text-red-600'>
-            {error}
-          </p>
-        )}
+        <div className='mb-4'>
+          {errors.map((error, index) => (
+            <p
+              className='mb-1 rounded-md bg-red-100 px-3 py-2 text-sm text-red-600'
+              key={index}
+            >
+              {error}
+            </p>
+          ))}
+        </div>
 
         <div className='mb-4'>
           <label

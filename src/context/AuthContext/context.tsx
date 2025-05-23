@@ -11,6 +11,12 @@ type AuthContextType = {
     shouldRemember: boolean,
   ) => Promise<void>;
   logout: () => Promise<void>;
+  register: (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+  ) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -22,6 +28,9 @@ const AuthContext = createContext<AuthContextType>({
   },
   logout: async () => {
     throw new Error('logout function not implemented');
+  },
+  register: async () => {
+    throw new Error('register function not implemented');
   },
 });
 
