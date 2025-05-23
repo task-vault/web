@@ -21,8 +21,12 @@ const Login = () => {
 
     try {
       await login(email, password, shouldStayLoggedIn);
-    } catch {
-      setError('Invalid email or password');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
     }
   };
 

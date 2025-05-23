@@ -12,23 +12,45 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       password: string,
       shouldRemember: boolean,
     ): Promise<void> => {
-      const res = await api.post('/users/login', {
-        email,
-        password,
-        shouldRemember,
-      });
-      if (res.data && res.data.email) {
-        recheckStatus();
+      try {
+        await api
+          .post('/users/login', {
+            email,
+            password,
+            shouldRemember,
+          })
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(error.response.data.message.join('\n'));
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
       }
+      recheckStatus();
     },
     [recheckStatus],
   );
 
   const logout = useCallback(async (): Promise<void> => {
-    const res = await api.post('/users/logout');
-    if (res.status === 200) {
-      recheckStatus();
+    try {
+      await api.post('/users/logout').catch((error) => {
+        if (error.response) {
+          throw new Error(error.response.data.message.join('\n'));
+        } else {
+          throw new Error('Network error');
+        }
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
     }
+    recheckStatus();
   }, [recheckStatus]);
 
   return (
