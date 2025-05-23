@@ -4,18 +4,24 @@ import { User } from '../types/user';
 import { useCallback } from 'react';
 
 const checkAccessToken = async (): Promise<User> => {
-  const res = await api.get('/users/session');
+  try {
+    const res = await api.get('/users/session');
+    if (res.status === 200) return res.data as User;
+  } catch {
+    throw new Error('Access token invalid');
+  }
 
-  if (res.status === 200) return res.data as User;
-  if (res.status === 401) throw new Error('Access token expired');
   throw new Error('Session check failed');
 };
 
 const tryRefreshToken = async (): Promise<User> => {
-  const res = await api.post('/users/refresh');
+  try {
+    const res = await api.post('/users/refresh');
+    if (res.status === 200) return res.data as User;
+  } catch {
+    throw new Error('Refresh token invalid');
+  }
 
-  if (res.status === 200) return res.data as User;
-  if (res.status === 401) throw new Error('Refresh token expired');
   throw new Error('Refresh token failed');
 };
 
@@ -28,7 +34,7 @@ const useAuthStatus = () => {
       } catch (error) {
         if (
           error instanceof Error &&
-          error.message === 'Access token expired'
+          error.message === 'Access token invalid'
         ) {
           return await tryRefreshToken();
         }
