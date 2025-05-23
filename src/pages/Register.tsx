@@ -37,7 +37,7 @@ const Register = () => {
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
       <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl lg:max-w-2xl lg:p-12'>
-        <h1 className='mb-6 text-center text-3xl font-bold text-blue-700 lg:text-4xl'>
+        <h1 className='mb-6 text-center text-3xl font-bold text-blue-950 lg:text-4xl'>
           Register
           <TaskVaultLogo />
         </h1>
@@ -68,7 +68,7 @@ const Register = () => {
             placeholder='Enter your first name'
             autoComplete='given-name'
             required
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-950 focus:outline-none'
           />
         </div>
 
@@ -87,7 +87,7 @@ const Register = () => {
             placeholder='Enter your last name'
             required
             autoComplete='family-name'
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-950 focus:outline-none'
           />
         </div>
 
@@ -106,7 +106,7 @@ const Register = () => {
             placeholder='Enter your email'
             required
             autoComplete='email'
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-950 focus:outline-none'
           />
         </div>
 
@@ -125,7 +125,7 @@ const Register = () => {
             placeholder='Enter your password'
             required
             autoComplete='new-password'
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-950 focus:outline-none'
           />
         </div>
 
@@ -144,7 +144,7 @@ const Register = () => {
             placeholder='Confirm your password'
             required
             autoComplete='off'
-            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+            className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-950 focus:outline-none'
           />
           {password && confirmPassword && password !== confirmPassword && (
             <p className='mt-1 text-sm text-red-600'>Passwords do not match</p>
@@ -156,7 +156,7 @@ const Register = () => {
           onClick={handleRegister}
           className={`w-full rounded-lg py-2 font-medium transition duration-300 ${
             isFormValid
-              ? 'bg-blue-600 text-white hover:bg-blue-900'
+              ? 'bg-blue-900 text-white hover:bg-blue-950'
               : 'cursor-not-allowed bg-gray-300 text-gray-500'
           }`}
         >
