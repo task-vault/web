@@ -43,6 +43,7 @@ const useAuthStatus = () => {
     },
     refetchInterval: 1000 * 60 * 30, // refresh every 30 mins
     refetchIntervalInBackground: true,
+    refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 60, // 1 hour
     retry: false,
   });
