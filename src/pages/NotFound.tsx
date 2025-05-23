@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
       <div className='w-full max-w-md rounded-2xl bg-white p-10 text-center shadow-xl lg:max-w-xl lg:p-16'>
-        <h1 className='mb-4 text-5xl font-bold text-blue-700 lg:text-6xl'>
+        <h1 className='mb-4 text-5xl font-bold text-blue-950 lg:text-6xl'>
           <TaskVaultLogo />
           <span className='mx-2'>404</span>
           <TaskVaultLogo />
@@ -17,7 +17,7 @@ const NotFound = () => {
 
         <Link
           to='/'
-          className='inline-block rounded-lg bg-blue-600 px-6 py-2 font-medium text-white transition duration-300 hover:bg-blue-900'
+          className='inline-block rounded-lg bg-blue-900 px-6 py-2 font-medium text-white transition duration-300 hover:bg-blue-950'
         >
           Go back to the homepage
         </Link>
