@@ -43,6 +43,7 @@ const Register = () => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder='Enter your first name'
+            autoComplete='given-name'
             required
             className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
@@ -62,6 +63,7 @@ const Register = () => {
             onChange={(e) => setLastName(e.target.value)}
             placeholder='Enter your last name'
             required
+            autoComplete='family-name'
             className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
@@ -80,6 +82,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder='Enter your email'
             required
+            autoComplete='email'
             className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
@@ -98,6 +101,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Enter your password'
             required
+            autoComplete='new-password'
             className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
         </div>
@@ -116,6 +120,7 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder='Confirm your password'
             required
+            autoComplete='off'
             className='w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none'
           />
           {password && confirmPassword && password !== confirmPassword && (
