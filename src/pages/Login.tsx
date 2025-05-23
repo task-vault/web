@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import TaskVaultLogo from '../components/TaskVaultLogo';
+import useAuth from '../context/AuthContext/useAuth';
 
 export const emailRegex = /\S+@\S+\.\S+/;
 
 const Login = () => {
+  const { login, isLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [shouldStayLoggedIn, setShouldStayLoggedIn] = useState(false);
@@ -12,6 +14,17 @@ const Login = () => {
 
   const isEmailValid = email && emailRegex.test(email);
   const isFormValid = isEmailValid && password;
+
+  const handleLogin = async () => {
+    setError(null);
+    if (!isFormValid) return;
+
+    try {
+      await login(email, password, shouldStayLoggedIn);
+    } catch {
+      setError('Invalid email or password');
+    }
+  };
 
   return (
     <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
@@ -82,7 +95,8 @@ const Login = () => {
         </div>
 
         <button
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
+          onClick={handleLogin}
           className={`w-full rounded-lg py-2 font-medium transition duration-300 ${
             isFormValid
               ? 'bg-blue-600 text-white hover:bg-blue-900'
