@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 
-const TaskVaultLogo = (props: ComponentProps<'img'>) => {
+const TaskVaultIcon = (props: ComponentProps<'img'>) => {
   return (
     <img
       {...props}
@@ -11,4 +11,4 @@ const TaskVaultLogo = (props: ComponentProps<'img'>) => {
   );
 };
 
-export default TaskVaultLogo;
+export default TaskVaultIcon;

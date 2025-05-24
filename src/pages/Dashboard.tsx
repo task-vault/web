@@ -1,9 +1,9 @@
-import LogoutButton from '../components/LogoutButton';
+import Statusbar from '../components/Statusbar';
 
 const Dashboard = () => {
   return (
-    <div>
-      <LogoutButton />
+    <div className='flex min-h-screen flex-col items-center'>
+      <Statusbar />
     </div>
   );
 };
