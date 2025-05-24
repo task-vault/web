@@ -24,7 +24,7 @@ const CurrentUser = () => {
   return (
     <div className='flex items-center gap-2'>
       <ProfileIcon />
-      <div className='flex flex-col items-center text-lg font-bold text-blue-950 md:flex-row md:text-xl lg:text-2xl'>
+      <div className='flex flex-col items-center text-lg font-bold text-blue-950 md:flex-row md:gap-2 md:text-xl lg:text-2xl'>
         <span>{firstName}</span>
         <span>{lastName}</span>
       </div>
