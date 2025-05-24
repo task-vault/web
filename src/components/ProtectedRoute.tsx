@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router';
 import useAuth from '../context/AuthContext/useAuth';
-import TaskVaultLogo from './TaskVaultLogo';
+import TaskVaultIcon from './TaskVaultIcon';
 
 type ProtectedRouteProps = {
   shouldRestrict?: boolean;
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ shouldRestrict }: ProtectedRouteProps) => {
   if (isLoading) {
     return (
       <div className='flex h-screen items-center justify-center'>
-        <TaskVaultLogo className='h-32 w-32 opacity-50' />
+        <TaskVaultIcon className='h-32 w-32 opacity-50' />
       </div>
     );
   }

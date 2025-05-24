@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { emailRegex } from './Login';
-import TaskVaultLogo from '../components/TaskVaultLogo';
+import TaskVaultIcon from '../components/TaskVaultIcon';
 import useAuth from '../context/AuthContext/useAuth';
 
 const Register = () => {
@@ -35,11 +35,11 @@ const Register = () => {
   };
 
   return (
-    <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
+    <section className='flex min-h-screen items-center justify-center'>
       <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl lg:max-w-2xl lg:p-12'>
         <h1 className='mb-6 text-center text-3xl font-bold text-blue-950 lg:text-4xl'>
           Register
-          <TaskVaultLogo />
+          <TaskVaultIcon />
         </h1>
 
         <div className='mb-4'>

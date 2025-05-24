@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import TaskVaultLogo from '../components/TaskVaultLogo';
+import TaskVaultIcon from '../components/TaskVaultIcon';
 import useAuth from '../context/AuthContext/useAuth';
 
 export const emailRegex = /\S+@\S+\.\S+/;
@@ -31,11 +31,11 @@ const Login = () => {
   };
 
   return (
-    <section className='flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 px-4'>
+    <section className='flex min-h-screen items-center justify-center px-4'>
       <div className='w-full max-w-md rounded-2xl bg-white p-8 shadow-xl lg:max-w-2xl lg:p-12'>
         <h1 className='mb-6 text-center text-3xl font-bold text-blue-950 lg:text-4xl'>
           Login
-          <TaskVaultLogo />
+          <TaskVaultIcon />
         </h1>
 
         <div className='mb-4'>

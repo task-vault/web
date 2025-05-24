@@ -7,28 +7,30 @@ import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
-    <Routes>
-      <Route element={<ProtectedRoute shouldRestrict />}>
+    <div className='h-screen w-screen bg-gradient-to-br from-green-100 to-blue-200'>
+      <Routes>
+        <Route element={<ProtectedRoute shouldRestrict />}>
+          <Route
+            path='/login'
+            element={<Login />}
+          />
+          <Route
+            path='/register'
+            element={<Register />}
+          />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path='/'
+            element={<Dashboard />}
+          />
+        </Route>
         <Route
-          path='/login'
-          element={<Login />}
+          path='*'
+          element={<NotFound />}
         />
-        <Route
-          path='/register'
-          element={<Register />}
-        />
-      </Route>
-      <Route element={<ProtectedRoute />}>
-        <Route
-          path='/'
-          element={<Dashboard />}
-        />
-      </Route>
-      <Route
-        path='*'
-        element={<NotFound />}
-      />
-    </Routes>
+      </Routes>
+    </div>
   );
 };
 
