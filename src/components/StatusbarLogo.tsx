@@ -9,7 +9,7 @@ const StatusbarLogo = () => {
     <>
       <img
         src='/task-vault-mobile.png'
-        className='h-28 cursor-pointer lg:hidden'
+        className='h-24 cursor-pointer lg:hidden'
         alt='Task Vault logo'
         onClick={handleLogoClick}
       />
