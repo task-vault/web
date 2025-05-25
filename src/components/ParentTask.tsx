@@ -75,7 +75,7 @@ const ParentTask = ({ task }: ParentTaskProps) => {
           )}
           {editing ? (
             <textarea
-              className='mt-2 w-full rounded-md border border-gray-300 p-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none'
+              className='mt-2 w-[90%] rounded-md border border-gray-300 p-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none'
               rows={5}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -85,13 +85,13 @@ const ParentTask = ({ task }: ParentTaskProps) => {
             <p className='text-md text-gray-600'>{description}</p>
           )}
         </div>
-        <div className='ml-auto flex min-w-[30%] flex-col items-center justify-center gap-4 text-center'>
+        <div className='ml-auto flex min-w-[30%] flex-col items-center justify-center gap-4 pr-4 text-center xl:p-0'>
           <div className='text-sm text-gray-700'>
             <p className='text-[1.1rem] leading-10 font-semibold'>Deadline</p>
             {editing ? (
               <input
                 type='datetime-local'
-                className='w-full rounded-md border border-gray-300 p-2 text-sm text-blue-950 focus:border-blue-500 focus:outline-none'
+                className='w-max rounded-md border border-gray-300 p-3 text-sm text-blue-950 focus:border-blue-500 focus:outline-none'
                 value={
                   deadline.includes('.')
                     ? deadline.split('.')[0]
