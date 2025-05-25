@@ -10,7 +10,7 @@ type TaskActionButtonsProps = {
 const TaskActionButtons = ({ id, completed }: TaskActionButtonsProps) => {
   const { complete, uncomplete, deleteTask } = useTasks();
   return (
-    <div className='flex justify-between md:pr-2 lg:pr-4'>
+    <div className='flex justify-between md:pr-2 lg:pr-4 xl:pr-6'>
       <button
         onClick={() => deleteTask(id)}
         className='inline-flex items-center gap-2 rounded-lg bg-red-400 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:outline-none'
