@@ -30,6 +30,9 @@ const ParentTask = ({ task }: ParentTaskProps) => {
     const trimmedDescription = description.trim();
     if (trimmedTitle === '') {
       setEditing(false);
+      setTitle(task.title);
+      setDescription(task.description || '');
+      setDeadline(task.deadline || '');
       return;
     }
     const isoDeadline = deadline ? new Date(deadline).toISOString() : undefined;
