@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Task } from '../types/tasks';
 import formatDeadline from '../utils/formatDeadline';
 import Subtasks from './Subtasks';
@@ -12,13 +12,14 @@ const ParentTask = ({ task }: ParentTaskProps) => {
   const { getProgress } = useTasks();
   const [progress, setProgress] = useState(0);
 
+  const refreshProgress = useCallback(async () => {
+    const progressValue = await getProgress(task.id);
+    setProgress(progressValue);
+  }, [getProgress, task.id]);
+
   useEffect(() => {
-    const getTaskProgress = async () => {
-      const progressValue = await getProgress(task.id);
-      setProgress(progressValue);
-    };
-    getTaskProgress();
-  }, [task.completed, getProgress, task.id]);
+    refreshProgress();
+  }, [refreshProgress, task.completed]);
 
   return (
     <div className='mx-auto flex w-full cursor-default flex-col gap-4 self-center rounded-lg bg-[#8af7] p-4 shadow-md transition-shadow duration-200 hover:shadow-lg md:w-[80%] lg:w-[60%]'>
@@ -50,7 +51,11 @@ const ParentTask = ({ task }: ParentTaskProps) => {
         id={task.id}
         completed={task.completed}
       />
-      <Subtasks subtasks={task.subtasks} />
+      <Subtasks
+        subtasks={task.subtasks}
+        parent={task.id}
+        refreshProgress={refreshProgress}
+      />
     </div>
   );
 };

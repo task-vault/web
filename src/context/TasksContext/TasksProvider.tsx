@@ -165,6 +165,72 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
     [getTasks],
   );
 
+  const completeSubtask = useCallback(
+    async (id: number, parent: number) => {
+      try {
+        await api
+          .post(`/tasks/${parent}/subtasks/${id}/complete`)
+          .then(() => getTasks())
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(error.response.data.message.join(';'));
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+      }
+    },
+    [getTasks],
+  );
+
+  const uncompleteSubtask = useCallback(
+    async (id: number, parent: number) => {
+      try {
+        await api
+          .post(`/tasks/${parent}/subtasks/${id}/uncomplete`)
+          .then(() => getTasks())
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(error.response.data.message.join(';'));
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+      }
+    },
+    [getTasks],
+  );
+
+  const deleteSubtask = useCallback(
+    async (id: number, parent: number) => {
+      try {
+        await api
+          .delete(`/tasks/${parent}/subtasks/${id}`)
+          .then(() => getTasks())
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(error.response.data.message.join(';'));
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+      }
+    },
+    [getTasks],
+  );
+
   useEffect(() => {
     getTasks();
     getTasksByState('completed');
@@ -174,7 +240,16 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <TasksContext.Provider
-      value={{ get, getProgress, complete, uncomplete, deleteTask }}
+      value={{
+        get,
+        getProgress,
+        complete,
+        uncomplete,
+        deleteTask,
+        completeSubtask,
+        uncompleteSubtask,
+        deleteSubtask,
+      }}
     >
       {children}
     </TasksContext.Provider>
