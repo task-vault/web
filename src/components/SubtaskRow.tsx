@@ -53,12 +53,14 @@ const SubtaskRow = ({ subtask, parent, refreshProgress }: SubtaskRowProps) => {
             <span className='text-md min-w-28 font-semibold text-blue-950'>
               {title}
             </span>
-            <span
-              className='ml-4 cursor-pointer text-gray-500 hover:text-blue-500'
-              onClick={() => setEditing(true)}
-            >
-              <EditIcon />
-            </span>
+            {subtask.completed === false && (
+              <span
+                className='ml-4 cursor-pointer text-gray-500 hover:text-blue-500'
+                onClick={() => setEditing(true)}
+              >
+                <EditIcon />
+              </span>
+            )}
           </>
         )}
       </div>

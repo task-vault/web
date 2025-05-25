@@ -38,13 +38,15 @@ const TaskActionButtons = ({
           Save
         </button>
       ) : (
-        <button
-          onClick={() => setEditing(true)}
-          className='inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-blue-800 focus:ring-2 focus:ring-blue-400 focus:outline-none'
-        >
-          <EditIcon />
-          Edit
-        </button>
+        completed === false && (
+          <button
+            onClick={() => setEditing(true)}
+            className='inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-blue-800 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+          >
+            <EditIcon />
+            Edit
+          </button>
+        )
       )}
       {completed ? (
         <button
