@@ -6,7 +6,7 @@ type StateTasksProps = {
   state: TaskState;
 };
 const StateTasks = ({ tasks, state }: StateTasksProps) => {
-  if (tasks.length === 0) {
+  if (!tasks.length) {
     return <NoTasksMessage state={state} />;
   }
   return <div className='capitalize'>{state} tasks</div>;
