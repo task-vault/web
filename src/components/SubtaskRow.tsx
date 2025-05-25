@@ -35,7 +35,7 @@ const SubtaskRow = ({ subtask, parent, refreshProgress }: SubtaskRowProps) => {
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex items-center'>
+      <div className='flex w-full items-center'>
         <span className='mr-2 text-lg font-semibold'>&minus;</span>
         {editing ? (
           <input
@@ -50,8 +50,8 @@ const SubtaskRow = ({ subtask, parent, refreshProgress }: SubtaskRowProps) => {
           />
         ) : (
           <>
-            <span className='text-md font-semibold text-blue-950'>
-              {subtask.title}
+            <span className='text-md min-w-28 font-semibold text-blue-950'>
+              {title}
             </span>
             <span
               className='ml-4 cursor-pointer text-gray-500 hover:text-blue-500'
