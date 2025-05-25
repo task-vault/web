@@ -1,5 +1,5 @@
 import { useState, PropsWithChildren, useCallback, useEffect } from 'react';
-import { Task, TaskState } from '../../types/user';
+import { Task, TaskState } from '../../types/tasks';
 import TasksContext from './context';
 import api from '../../api';
 
