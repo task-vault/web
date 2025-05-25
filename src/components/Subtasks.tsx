@@ -1,5 +1,10 @@
+import { useMemo } from 'react';
 import { Subtask } from '../types/tasks';
 import SubtaskRow from './SubtaskRow';
+
+const sortById = (a: Subtask, b: Subtask) => {
+  return a.id - b.id;
+};
 
 type SubtasksProps = {
   subtasks: Subtask[];
@@ -7,9 +12,13 @@ type SubtasksProps = {
   refreshProgress: () => Promise<void>;
 };
 const Subtasks = ({ subtasks, parent, refreshProgress }: SubtasksProps) => {
+  const sortedSubtasks = useMemo(() => {
+    return subtasks.sort(sortById);
+  }, [subtasks]);
+
   return (
-    <div className='ml-10 flex flex-col gap-2 md:ml-20'>
-      {subtasks.map((subtask) => (
+    <div className='ml-5 flex flex-col gap-2 md:ml-16'>
+      {sortedSubtasks.map((subtask) => (
         <SubtaskRow
           key={subtask.id}
           subtask={subtask}
