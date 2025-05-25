@@ -8,10 +8,16 @@ type SubtaskRowProps = {
   subtask: Subtask;
   parent: number;
   refreshProgress: () => Promise<void>;
+  setCreating?: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const SubtaskRow = ({ subtask, parent, refreshProgress }: SubtaskRowProps) => {
-  const { editSubtask } = useTasks();
-  const [editing, setEditing] = useState(false);
+const SubtaskRow = ({
+  subtask,
+  parent,
+  refreshProgress,
+  setCreating,
+}: SubtaskRowProps) => {
+  const { editSubtask, createSubtask } = useTasks();
+  const [editing, setEditing] = useState(subtask.id === -1);
   const [title, setTitle] = useState(subtask.title);
 
   const handleBlur = async () => {
@@ -19,6 +25,18 @@ const SubtaskRow = ({ subtask, parent, refreshProgress }: SubtaskRowProps) => {
     if (temp === '' || temp === subtask.title) {
       setEditing(false);
       setTitle(subtask.title);
+      return;
+    }
+
+    if (subtask.id === -1) {
+      try {
+        await createSubtask(parent, temp);
+        setCreating?.(false);
+      } catch (error) {
+        alert(error instanceof Error ? error.message : 'An error occurred');
+      } finally {
+        setEditing(false);
+      }
       return;
     }
 

@@ -35,7 +35,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
         .then((response) => response.data)
         .catch((error) => {
           if (error.response) {
-            throw new Error(error.response.data.message.join(';'));
+            throw new Error(
+              Array.isArray(error.response.data.message)
+                ? error.response.data.message.join(';')
+                : error.response.data.message,
+            );
           } else {
             throw new Error('Network error');
           }
@@ -56,7 +60,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
         .then((response) => setTasks(response.data))
         .catch((error) => {
           if (error.response) {
-            throw new Error(error.response.data.message.join(';'));
+            throw new Error(
+              Array.isArray(error.response.data.message)
+                ? error.response.data.message.join(';')
+                : error.response.data.message,
+            );
           } else {
             throw new Error('Network error');
           }
@@ -87,7 +95,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
         })
         .catch((error) => {
           if (error.response) {
-            throw new Error(error.response.data.message.join(';'));
+            throw new Error(
+              Array.isArray(error.response.data.message)
+                ? error.response.data.message.join(';')
+                : error.response.data.message,
+            );
           } else {
             throw new Error('Network error');
           }
@@ -107,7 +119,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -129,7 +145,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -154,7 +174,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -176,7 +200,37 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+      }
+    },
+    [getTasks],
+  );
+
+  const createSubtask = useCallback(
+    async (parentId: number, title: string) => {
+      try {
+        await api
+          .post(`/tasks/${parentId}/subtasks`, { title })
+          .then(() => getTasks())
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -198,7 +252,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -220,7 +278,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -242,7 +304,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -264,7 +330,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {
-              throw new Error(error.response.data.message.join(';'));
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
             } else {
               throw new Error('Network error');
             }
@@ -297,6 +367,7 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
         uncomplete,
         editTask,
         deleteTask,
+        createSubtask,
         completeSubtask,
         uncompleteSubtask,
         editSubtask,

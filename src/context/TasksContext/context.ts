@@ -11,6 +11,7 @@ type TasksContextType = {
     data: { title: string; description?: string; deadline?: string },
   ) => Promise<void>;
   deleteTask: (id: number) => Promise<void>;
+  createSubtask: (parentId: number, title: string) => Promise<void>;
   completeSubtask: (id: number, parentId: number) => Promise<void>;
   uncompleteSubtask: (id: number, parentId: number) => Promise<void>;
   editSubtask: (id: number, parentId: number, title: string) => Promise<void>;
@@ -24,6 +25,7 @@ const TasksContext = createContext<TasksContextType>({
   uncomplete: async () => {},
   editTask: async () => {},
   deleteTask: async () => {},
+  createSubtask: async () => {},
   completeSubtask: async () => {},
   uncompleteSubtask: async () => {},
   editSubtask: async () => {},

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Subtask } from '../types/tasks';
 import SubtaskRow from './SubtaskRow';
 
@@ -12,6 +12,7 @@ type SubtasksProps = {
   refreshProgress: () => Promise<void>;
 };
 const Subtasks = ({ subtasks, parent, refreshProgress }: SubtasksProps) => {
+  const [creating, setCreating] = useState(false);
   const sortedSubtasks = useMemo(() => {
     return subtasks.sort(sortById);
   }, [subtasks]);
@@ -26,6 +27,21 @@ const Subtasks = ({ subtasks, parent, refreshProgress }: SubtasksProps) => {
           refreshProgress={refreshProgress}
         />
       ))}
+      {creating ? (
+        <SubtaskRow
+          subtask={{ id: -1, title: '', completed: false }}
+          parent={parent}
+          refreshProgress={refreshProgress}
+          setCreating={setCreating}
+        />
+      ) : (
+        <button
+          onClick={() => setCreating(true)}
+          className='inline-flex w-fit items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none'
+        >
+          Add Subtask
+        </button>
+      )}
     </div>
   );
 };
