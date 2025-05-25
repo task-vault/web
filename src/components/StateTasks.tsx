@@ -4,9 +4,12 @@ import NoTasksMessage from './NoTasksMessage';
 import ParentTask from './ParentTask';
 
 const sortByDeadline = (a: Task, b: Task) => {
-  if (!a.deadline) return 1;
-  if (!b.deadline) return -1;
-  return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+  if (a.deadline && b.deadline) {
+    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+  }
+  if (a.deadline) return -1;
+  if (b.deadline) return 1;
+  return a.id - b.id;
 };
 
 type StateTasksProps = {
