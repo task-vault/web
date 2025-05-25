@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import { TasksProvider } from './context/TasksContext/TasksProvider';
 
 const App = () => {
   return (
@@ -22,7 +23,11 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route
             path='/'
-            element={<Dashboard />}
+            element={
+              <TasksProvider>
+                <Dashboard />
+              </TasksProvider>
+            }
           />
         </Route>
         <Route
