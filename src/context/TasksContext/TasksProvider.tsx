@@ -61,9 +61,9 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getTasks();
+    getTasksByState('completed');
     getTasksByState('overdue');
     getTasksByState('pending');
-    getTasksByState('completed');
   }, [getTasks, getTasksByState]);
 
   return (

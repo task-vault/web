@@ -22,4 +22,5 @@ export type Task = {
   subtasks: Subtask[];
 };
 
-export type TaskState = 'overdue' | 'pending' | 'completed';
+export const taskStates = ['completed', 'overdue', 'pending'] as const;
+export type TaskState = (typeof taskStates)[number];
