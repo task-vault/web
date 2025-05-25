@@ -233,10 +233,13 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getTasks();
+  }, [getTasks]);
+
+  useEffect(() => {
     getTasksByState('completed');
     getTasksByState('overdue');
     getTasksByState('pending');
-  }, [getTasks, getTasksByState, tasks]);
+  }, [getTasksByState, tasks]);
 
   return (
     <TasksContext.Provider
