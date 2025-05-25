@@ -43,7 +43,7 @@ const StateHeader = ({ state, isOpen, toggle }: StateHeaderProps) => {
   return (
     <div
       onClick={toggle}
-      className={`flex w-32 cursor-pointer items-center justify-start gap-2 text-lg font-semibold transition-transform duration-200 select-none hover:scale-110 md:w-36 md:text-xl lg:w-40 lg:text-2xl ${
+      className={`flex w-32 items-center justify-start gap-2 text-lg font-semibold transition-transform duration-200 select-none hover:scale-110 md:w-36 md:text-xl lg:w-40 lg:text-2xl ${
         state === 'completed'
           ? 'text-green-600'
           : state === 'overdue'
