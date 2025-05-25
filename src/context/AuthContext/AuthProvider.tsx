@@ -2,7 +2,6 @@ import { PropsWithChildren, useCallback } from 'react';
 import api from '../../api';
 import useAuthStatus from '../../hooks/useAuthStatus';
 import AuthContext from './context';
-import { clearAuthCookies } from '../../utils/cookies';
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
   const { isAuthenticated, isLoading, user, recheckStatus } = useAuthStatus();
@@ -70,7 +69,6 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   );
 
   const logout = useCallback(async (): Promise<void> => {
-    clearAuthCookies();
     try {
       await api.post('/users/logout').catch((error) => {
         if (error.response) {
