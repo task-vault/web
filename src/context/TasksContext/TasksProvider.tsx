@@ -9,6 +9,25 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
   const [pendingTasks, setPendingTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
 
+  const get = useCallback(
+    (state?: TaskState) => {
+      if (!state) {
+        return tasks;
+      }
+      switch (state) {
+        case 'overdue':
+          return overdueTasks;
+        case 'pending':
+          return pendingTasks;
+        case 'completed':
+          return completedTasks;
+        default:
+          return tasks;
+      }
+    },
+    [tasks, overdueTasks, pendingTasks, completedTasks],
+  );
+
   const getTasks = useCallback(async () => {
     try {
       await api
@@ -67,10 +86,6 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
   }, [getTasks, getTasksByState]);
 
   return (
-    <TasksContext.Provider
-      value={{ tasks, overdueTasks, pendingTasks, completedTasks }}
-    >
-      {children}
-    </TasksContext.Provider>
+    <TasksContext.Provider value={{ get }}>{children}</TasksContext.Provider>
   );
 };
