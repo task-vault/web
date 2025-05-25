@@ -7,7 +7,7 @@ const ArrowOpen = () => (
     viewBox='0 0 24 24'
     strokeWidth={2}
     stroke='currentColor'
-    className='size-6'
+    className='size-8'
   >
     <path
       strokeLinecap='round'
@@ -24,7 +24,7 @@ const ArrowClosed = () => (
     viewBox='0 0 24 24'
     strokeWidth={2}
     stroke='currentColor'
-    className='size-6'
+    className='size-8'
   >
     <path
       strokeLinecap='round'
@@ -41,14 +41,18 @@ type StateHeaderProps = {
 };
 const StateHeader = ({ state, isOpen, toggle }: StateHeaderProps) => {
   return (
-    <div className='flex w-32 items-center justify-start gap-2 text-lg font-semibold select-none md:text-xl lg:text-2xl'>
-      <div
-        onClick={toggle}
-        className='cursor-pointer transition-transform duration-200 hover:scale-[135%]'
-      >
-        {isOpen ? <ArrowOpen /> : <ArrowClosed />}
-      </div>
-      <span className='capitalize'>{state}</span>
+    <div
+      onClick={toggle}
+      className={`flex w-32 cursor-pointer items-center justify-start gap-2 text-lg font-semibold transition-transform duration-200 select-none hover:scale-110 md:w-36 md:text-xl lg:w-40 lg:text-2xl ${
+        state === 'completed'
+          ? 'text-green-600'
+          : state === 'overdue'
+            ? 'text-red-400'
+            : 'text-blue-950'
+      }`}
+    >
+      {isOpen ? <ArrowOpen /> : <ArrowClosed />}
+      <span className='w-full text-center capitalize'>{state}</span>
     </div>
   );
 };
