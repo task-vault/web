@@ -16,7 +16,6 @@ const SubtaskActionButtons = ({
   refreshProgress,
 }: SubtaskActionButtonsProps) => {
   const { completeSubtask, uncompleteSubtask, deleteSubtask } = useTasks();
-  //after each action, refresh the progress of the parent task
   const handleAction = async () => {
     await refreshProgress();
   };
