@@ -34,18 +34,18 @@ const StateTasks = ({ tasks, state, doesHaveAddButton }: StateTasksProps) => {
     }
   }, [creating]);
 
-  if (!tasks.length) {
-    return <NoTasksMessage state={state} />;
-  }
-
   return (
     <div className='flex w-full flex-col gap-4 md:gap-4'>
-      {sortedTasks.map((task) => (
-        <ParentTask
-          key={task.id}
-          task={task}
-        />
-      ))}
+      {!sortedTasks.length ? (
+        <NoTasksMessage state={state} />
+      ) : (
+        sortedTasks.map((task) => (
+          <ParentTask
+            key={task.id}
+            task={task}
+          />
+        ))
+      )}
       {creating && (
         <ParentTask
           task={{

@@ -5,7 +5,7 @@ type NoTasksMessageProps = {
 };
 const NoTasksMessage = ({ state }: NoTasksMessageProps) => {
   return (
-    <p className='text-md text-blue-950 lg:text-lg'>
+    <p className='text-md text-center text-blue-950 lg:text-lg'>
       Your {state} tasks will appear here.
     </p>
   );
