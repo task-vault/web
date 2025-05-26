@@ -17,7 +17,7 @@ const State = ({ state }: StateProps) => {
   }, [get, state]);
 
   return (
-    <div className='flex w-[95%] flex-col items-center justify-center gap-10 md:w-[75%] md:gap-12 lg:w-[50%]'>
+    <div className='flex w-[95%] flex-col items-center justify-center gap-10 md:w-[75%] md:gap-12 xl:w-[60%]'>
       <StateHeader
         state={state}
         isOpen={isOpen}
@@ -27,6 +27,7 @@ const State = ({ state }: StateProps) => {
         <StateTasks
           tasks={tasks}
           state={state}
+          doesHaveAddButton={state === 'pending'}
         />
       )}
     </div>
