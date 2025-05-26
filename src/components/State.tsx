@@ -27,6 +27,7 @@ const State = ({ state }: StateProps) => {
         <StateTasks
           tasks={tasks}
           state={state}
+          doesHaveAddButton={state === 'pending'}
         />
       )}
     </div>

@@ -163,6 +163,32 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
     [getTasks],
   );
 
+  const createTask = useCallback(
+    async (title: string, description?: string, deadline?: string) => {
+      try {
+        await api
+          .post('/tasks', { title, description, deadline })
+          .then(() => getTasks())
+          .catch((error) => {
+            if (error.response) {
+              throw new Error(
+                Array.isArray(error.response.data.message)
+                  ? error.response.data.message.join(';')
+                  : error.response.data.message,
+              );
+            } else {
+              throw new Error('Network error');
+            }
+          });
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        }
+      }
+    },
+    [getTasks],
+  );
+
   const editTask = useCallback(
     async (
       id: number,
@@ -365,6 +391,7 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
         getProgress,
         complete,
         uncomplete,
+        createTask,
         editTask,
         deleteTask,
         createSubtask,

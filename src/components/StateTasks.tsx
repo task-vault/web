@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Task, TaskState } from '../types/tasks';
 import NoTasksMessage from './NoTasksMessage';
 import ParentTask from './ParentTask';
@@ -15,11 +15,24 @@ const sortByDeadline = (a: Task, b: Task) => {
 type StateTasksProps = {
   tasks: Task[];
   state: TaskState;
+  doesHaveAddButton?: boolean;
 };
-const StateTasks = ({ tasks, state }: StateTasksProps) => {
+const StateTasks = ({ tasks, state, doesHaveAddButton }: StateTasksProps) => {
+  const [creating, setCreating] = useState(false);
+  const cancelRef = useRef<HTMLButtonElement>(null);
+
   const sortedTasks = useMemo(() => {
     return tasks.sort(sortByDeadline);
   }, [tasks]);
+
+  useEffect(() => {
+    if (creating && cancelRef.current) {
+      cancelRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  }, [creating]);
 
   if (!tasks.length) {
     return <NoTasksMessage state={state} />;
@@ -33,6 +46,31 @@ const StateTasks = ({ tasks, state }: StateTasksProps) => {
           task={task}
         />
       ))}
+      {creating && (
+        <ParentTask
+          task={{
+            id: -1,
+            title: '',
+            description: '',
+            deadline: null,
+            completed: false,
+            subtasks: [],
+          }}
+          isCreating={true}
+          setCreating={setCreating}
+        />
+      )}
+      {doesHaveAddButton && (
+        <button
+          className='mt-4 flex w-fit self-center rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600'
+          onClick={() => {
+            setCreating((prev) => !prev);
+          }}
+          ref={cancelRef}
+        >
+          {creating ? 'Cancel' : 'Add Task'}
+        </button>
+      )}
     </div>
   );
 };

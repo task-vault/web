@@ -7,11 +7,13 @@ import TaskActionButtons from './TaskActionButtons';
 
 type ParentTaskProps = {
   task: Task;
+  isCreating?: boolean;
+  setCreating?: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const ParentTask = ({ task }: ParentTaskProps) => {
-  const { getProgress, editTask } = useTasks();
+const ParentTask = ({ task, isCreating, setCreating }: ParentTaskProps) => {
+  const { getProgress, editTask, createTask } = useTasks();
   const [progress, setProgress] = useState(0);
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(isCreating || false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description || '');
   const [deadline, setDeadline] = useState(task.deadline || '');
@@ -36,6 +38,21 @@ const ParentTask = ({ task }: ParentTaskProps) => {
       return;
     }
     const isoDeadline = deadline ? new Date(deadline).toISOString() : undefined;
+
+    if (task.id === -1) {
+      try {
+        await createTask(trimmedTitle, trimmedDescription, isoDeadline);
+        setCreating?.(false);
+      } catch (error) {
+        alert(error instanceof Error ? error.message : 'An error occurred');
+        setTitle('');
+        setDescription('');
+        setDeadline('');
+      } finally {
+        setEditing(false);
+      }
+      return;
+    }
 
     try {
       await editTask(task.id, {
