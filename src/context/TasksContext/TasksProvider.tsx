@@ -167,7 +167,11 @@ export const TasksProvider = ({ children }: PropsWithChildren) => {
     async (title: string, description?: string, deadline?: string) => {
       try {
         await api
-          .post('/tasks', { title, description, deadline })
+          .post('/tasks', {
+            title,
+            description: description || null,
+            deadline: deadline || null,
+          })
           .then(() => getTasks())
           .catch((error) => {
             if (error.response) {

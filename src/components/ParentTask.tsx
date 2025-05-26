@@ -140,11 +140,13 @@ const ParentTask = ({ task, isCreating, setCreating }: ParentTaskProps) => {
         setEditing={setEditing}
         save={handleSave}
       />
-      <Subtasks
-        subtasks={task.subtasks}
-        parent={task.id}
-        refreshProgress={refreshProgress}
-      />
+      {!isCreating && (
+        <Subtasks
+          subtasks={task.subtasks}
+          parent={task.id}
+          refreshProgress={refreshProgress}
+        />
+      )}
     </div>
   );
 };
